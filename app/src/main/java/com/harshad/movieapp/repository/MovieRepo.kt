@@ -15,9 +15,13 @@ class MovieRepo {
     val responseHandler = ResponseHandler()
 
     suspend fun fetchMovieShowListRepo(pageNo: String): Resource<List<ResponseItem>> {
-        var response = apiClient.fetchMovieShowList(pageNo)
-        var successResponse = responseHandler.handleSuccess(response)
-        Log.d("Repo", "$successResponse")
-        return successResponse
+        try {
+            var response = apiClient.fetchMovieShowList(pageNo)
+            var successResponse = responseHandler.handleSuccess(response)
+            Log.d("Repo", "$successResponse")
+            return successResponse
+        } catch (e: Exception) {
+            return responseHandler.handleException(e)
+        }
     }
 }
