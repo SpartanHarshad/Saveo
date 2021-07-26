@@ -8,9 +8,10 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class Network {
 
-    companion object{
+    companion object {
         private val httpLoggingInterceptor =
             HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
+
         fun getInstance(): Retrofit {
             return Retrofit.Builder()
                 .baseUrl(BASE_URL)

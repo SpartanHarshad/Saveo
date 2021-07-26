@@ -6,7 +6,6 @@ import android.net.ConnectivityManager
 import android.net.NetworkInfo
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -51,7 +50,7 @@ class MainActivity : AppCompatActivity(), PostClickListener {
         RvHorizontal.adapter = movieShowAdapter
         //infinite scroll view
         var gridLayoutManager = GridLayoutManager(this, 3)
-        infiniteMoviePosterAdapter = InfiniteMoviePosterAdapter(moviePosterList,this)
+        infiniteMoviePosterAdapter = InfiniteMoviePosterAdapter(moviePosterList, this)
         RvGridInfinite.layoutManager = gridLayoutManager
         RvGridInfinite.adapter = infiniteMoviePosterAdapter
         RvGridInfinite.addOnScrollListener(object : RecyclerView.OnScrollListener() {
@@ -63,12 +62,11 @@ class MainActivity : AppCompatActivity(), PostClickListener {
                     if (dataLoader) {
                         if (visibleItemCount + previousVisibleItems >= totalVisibleItems) {
                             dataLoader = false
-                            Log.v("chek", "$totalVisibleItems")
-                                if (++pageNo <= 5) {
-                                    if(checkInternetConnectivity(applicationContext)){
-                                        loadMoviePosterList(pageNo)
-                                    }
+                            if (++pageNo <= 5) {
+                                if (checkInternetConnectivity(applicationContext)) {
+                                    loadMoviePosterList(pageNo)
                                 }
+                            }
                             dataLoader = true
                         }
                     }
@@ -81,24 +79,20 @@ class MainActivity : AppCompatActivity(), PostClickListener {
         viewModel.fetchMovieShowList("$pageNo").observe(this@MainActivity, Observer {
             moviePosterList.clear()
             moviePosterList.addAll(it)
-            Log.d("page_no", "$pageNo")
-            Log.d("infinite_1", "$it")
             infiniteMoviePosterAdapter.notifyDataSetChanged()
         })
     }
 
-    private fun callApi(pageNo:Int) {
+    private fun callApi(pageNo: Int) {
         if (checkInternetConnectivity(this)) {
             viewModel.fetchMovieShowList("1").observe(this, Observer {
                 movieShowList.clear()
                 movieShowList.addAll(it)
-                Log.d("Res", "$it")
                 movieShowAdapter.notifyDataSetChanged()
             })
             viewModel.fetchMovieShowList("$pageNo").observe(this, Observer {
                 moviePosterList.clear()
                 moviePosterList.addAll(it)
-                Log.d("infinite", "$it")
                 infiniteMoviePosterAdapter.notifyDataSetChanged()
             })
             Toast.makeText(this, "Internet Is connected", Toast.LENGTH_SHORT).show()
@@ -123,12 +117,12 @@ class MainActivity : AppCompatActivity(), PostClickListener {
     }
 
     override fun onPosterClickListener(responseItem: ResponseItem) {
-        val intent = Intent(this@MainActivity,MovieDetailsActivity::class.java)
-        intent.putExtra("MovieName",responseItem.name)
-        intent.putExtra("MoviePoster",responseItem.image.original)
-        intent.putExtra("MovieTime",responseItem.schedule.time)
-        intent.putExtra("MovieDate",responseItem.premiered)
-        intent.putExtra("MovieSummary",responseItem.summary)
+        val intent = Intent(this@MainActivity, MovieDetailsActivity::class.java)
+        intent.putExtra("MovieName", responseItem.name)
+        intent.putExtra("MoviePoster", responseItem.image.original)
+        intent.putExtra("MovieTime", responseItem.schedule.time)
+        intent.putExtra("MovieDate", responseItem.premiered)
+        intent.putExtra("MovieSummary", responseItem.summary)
         startActivity(intent)
     }
 }

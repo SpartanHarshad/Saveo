@@ -6,12 +6,12 @@ import retrofit2.http.GET
 import retrofit2.http.Query
 
 interface ApiClient {
-    companion object{
+    companion object {
         val BASE_URL = "https://api.tvmaze.com/"
     }
 
     @GET("shows")
     suspend fun fetchMovieShowList(
-        @Query("page") pageNo :String
+        @Query("page") pageNo: String,
     ): List<ResponseItem>
 }

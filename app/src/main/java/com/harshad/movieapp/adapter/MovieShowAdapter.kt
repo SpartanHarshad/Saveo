@@ -19,7 +19,7 @@ class MovieShowAdapter(val moviePosterList: List<ResponseItem>) :
     }
 
     override fun onBindViewHolder(holder: MoviePosterViewHolder, position: Int) {
-        val responseItem : ResponseItem = moviePosterList[position]
+        val responseItem: ResponseItem = moviePosterList[position]
         holder.setImagePoster(responseItem)
     }
 
@@ -30,7 +30,7 @@ class MovieShowAdapter(val moviePosterList: List<ResponseItem>) :
 
 class MoviePosterViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
 
-    fun setImagePoster(responseItem: ResponseItem){
+    fun setImagePoster(responseItem: ResponseItem) {
         view.apply {
             Glide.with(ivMoviePoster).load(responseItem?.image?.original).into(ivMoviePoster)
         }

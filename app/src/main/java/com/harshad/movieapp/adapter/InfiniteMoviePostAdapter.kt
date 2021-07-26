@@ -18,11 +18,11 @@ class InfiniteMoviePosterAdapter(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): InfiniteMoviePosterHolder {
         val view =
             LayoutInflater.from(parent.context).inflate(R.layout.infinite_post_item, parent, false)
-        return InfiniteMoviePosterHolder(view,postClickListener)
+        return InfiniteMoviePosterHolder(view, postClickListener)
     }
 
     override fun onBindViewHolder(holder: InfiniteMoviePosterHolder, position: Int) {
-        val responseItem : ResponseItem = moviePosterList[position]
+        val responseItem: ResponseItem = moviePosterList[position]
         holder.setMoviePoster(responseItem)
     }
 

@@ -22,7 +22,7 @@ class MovieDetailsActivity : AppCompatActivity() {
     }
 
     private fun backToHome() {
-        val intent = Intent(this@MovieDetailsActivity,MainActivity::class.java)
+        val intent = Intent(this@MovieDetailsActivity, MainActivity::class.java)
         startActivity(intent)
     }
 
