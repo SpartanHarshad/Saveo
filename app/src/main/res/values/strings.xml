@@ -2,4 +2,10 @@
     <string name="app_name">MovieApp</string>
     <string name="movies">Movies</string>
     <string name="show_Showing">Show Showing</string>
+    <string name="genres_1">Drama</string>
+    <string name="genres_2">Family</string>
+    <string name="genres_3">Romance</string>
+    <string name="review">Reviews</string>
+    <string name="book_now">BOOK NOW</string>
+    <string name="synopsis">Synopsis</string>
 </resources>

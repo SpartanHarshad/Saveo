@@ -1,6 +1,7 @@
 package com.harshad.movieapp.view
 
 import android.content.Context
+import android.content.Intent
 import android.net.ConnectivityManager
 import android.net.NetworkInfo
 import androidx.appcompat.app.AppCompatActivity
@@ -122,7 +123,13 @@ class MainActivity : AppCompatActivity(), PostClickListener {
     }
 
     override fun onPosterClickListener(responseItem: ResponseItem) {
-        Toast.makeText(this,"${responseItem.name}",Toast.LENGTH_SHORT).show()
+        val intent = Intent(this@MainActivity,MovieDetailsActivity::class.java)
+        intent.putExtra("MovieName",responseItem.name)
+        intent.putExtra("MoviePoster",responseItem.image.original)
+        intent.putExtra("MovieTime",responseItem.schedule.time)
+        intent.putExtra("MovieDate",responseItem.premiered)
+        intent.putExtra("MovieSummary",responseItem.summary)
+        startActivity(intent)
     }
 }
 
